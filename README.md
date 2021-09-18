@@ -1,6 +1,6 @@
 # Image Steganography
 
-![image_out]('./image_out.png')  
+![image_out](./image_out.png)  
 What you see isn't everything.  
 This image contains hidden data.
 
