@@ -1,0 +1,9 @@
+{
+  "encoding": "utf8",
+  "bits": 8,
+  "token_string": "#secret#",
+  "payload": "./payload.txt",
+  "in_image": "./image.png",
+  "out_image": "./image_out.png",
+  "modified_image": "./image_out.png"
+}
