@@ -1,7 +1,9 @@
+import io
 import json
 import numpy as np
 from PIL import Image
 from typing import Union, Tuple
+from utils import get_timestamp_as_md5
 
 class Steganography():
     '''
@@ -162,4 +164,32 @@ class Steganography():
         binary_string = self.get_lsb_string(imarray)
         return self.binstr_to_ascii(binary_string)
     
+    def hide_message_for_web(self, image: bytes, message: str) -> Union[bytes, None]:
+        if (len(message) == 0):
+            return None
+        message += self.token_string
+        img = Image.open(io.BytesIO(image))
+        pixels = self.get_pixel_info(img)
+        modified_array = self.replace_lsb(
+            image_size = img.size,
+            message = message,
+            pixel_info = pixels,
+            modified_array = self.get_verified_array(pixels.shape)
+        )
+        '''
+        TODO: concat PNG File Header
+        '''
+        # Alternative way to response PNG bytes
+        temp_file_name = f'{get_timestamp_as_md5()}.png'
+        image = Image.fromarray(modified_array)
+        image.save(temp_file_name)
+        with open(temp_file_name, 'rb') as f:
+            image = f.read()
+        return image
     
+    def seek_message_for_web(self, image: bytes) -> Union[str, None]:
+        img = Image.open(io.BytesIO(image))
+        imarray = np.array(img)
+        binary_string = self.get_lsb_string(imarray)
+        return self.binstr_to_ascii(binary_string)
+        
