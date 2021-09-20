@@ -11,31 +11,19 @@ This image contains hidden data.
 ```txt
 numpy==1.21.2
 Pillow==8.3.2
+fastapi==0.68.1
+pydantic==1.8.2
+uvicorn==0.15.0
+python-multipart==0.0.5
 ```
 
-### Install
+## Install
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## How to use
-
-### Check setting file
-
-You can check the image path or other required values.
-
-```json
-{
-  "encoding": "utf8",
-  "bits": 8,
-  "token_string": "#secret#",
-  "payload": "./payload.txt",
-  "in_image": "./image.png",
-  "out_image": "./image_out.png",
-  "modified_image": "./image_out.png"
-}
-```
+## Use as a module
 
 ### Hide message
 
@@ -63,4 +51,39 @@ or
 
 ```bash
 python seek.py -in image_out.png
+```
+
+## Serve as WebServer (with FastAPI)
+
+can serve steganography module on web server if you want.  
+
+```bash
+uvicorn main:app --reload
+```
+
+### API Document
+
+[Automatic docs](https://fastapi.tiangolo.com/features/#automatic-docs)
+
+Check this out
+
+- http://localhost:8000/docs
+- http://localhost:8000/redoc
+
+## Appendix
+
+### Check setting file
+
+You can check the image path or other required values.
+
+```json
+{
+  "encoding": "utf8",
+  "bits": 8,
+  "token_string": "#secret#",
+  "payload": "./payload.txt",
+  "in_image": "./image.png",
+  "out_image": "./image_out.png",
+  "modified_image": "./image_out.png"
+}
 ```
