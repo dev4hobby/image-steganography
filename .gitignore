@@ -3,3 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 # << Python << #
+
+# >> misc: image >> #
+misc/
+!image_out.png
+!image.png
+*.png
+# << misc: image << #

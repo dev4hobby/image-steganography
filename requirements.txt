@@ -1,2 +1,13 @@
+asgiref==3.4.1
+certifi==2021.5.30
+click==8.0.1
+fastapi==0.68.1
+h11==0.12.0
 numpy==1.21.2
 Pillow==8.3.2
+pydantic==1.8.2
+python-multipart==0.0.5
+six==1.16.0
+starlette==0.14.2
+typing-extensions==3.10.0.2
+uvicorn==0.15.0
