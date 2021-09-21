@@ -5,6 +5,7 @@ __pycache__/
 # << Python << #
 
 # >> misc: image >> #
+misc/
 !image_out.png
 !image.png
 *.png

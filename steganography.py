@@ -3,6 +3,7 @@ import json
 import numpy as np
 from PIL import Image
 from typing import Union, Tuple
+from pathlib import Path
 from utils import get_timestamp_as_md5
 
 class Steganography():
@@ -180,7 +181,8 @@ class Steganography():
         TODO: concat PNG File Header
         '''
         # Alternative way to response PNG bytes
-        temp_file_name = f'{get_timestamp_as_md5()}.png'
+        Path('./misc').mkdir(parents=True, exist_ok=True)
+        temp_file_name = f'./misc/{get_timestamp_as_md5()}.png'
         image = Image.fromarray(modified_array)
         image.save(temp_file_name)
         with open(temp_file_name, 'rb') as f:
