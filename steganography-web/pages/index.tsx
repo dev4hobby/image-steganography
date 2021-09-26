@@ -68,8 +68,9 @@ const Home: NextPage = () => {
   }
 
   const passImageToSeekMessage = () => {
+    const now = new Date().toISOString().slice(0, 19).replace(/-/g, '').replace(/:/g, '').replace(/T/g, '')
     if (resultImageBlob)
-      setImageForSeek(new File([resultImageBlob], __filename="hello.png"))
+      setImageForSeek(new File([resultImageBlob], __filename=`${now}-d3fau1t.png`))
     // setImageForSeek(new File(resultImageBlob, "blob.png"))
   }
 
