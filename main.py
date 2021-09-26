@@ -1,11 +1,22 @@
 import time
 from fastapi import FastAPI, Form, File, Response
+from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 from steganography import Steganography
 
-s = Steganography()
-app = FastAPI()
 start_time = time.time()
+s = Steganography()
+origins = [
+    "http://localhost:3000",
+]
+app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get('/')
 async def read_root():

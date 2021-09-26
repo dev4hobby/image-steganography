@@ -124,8 +124,8 @@ class Steganography():
         binary_message = str()
         binary_token = self.message_to_binary(self.token_string)
         done = False
-        for row_index, row in enumerate(imarray): # 811
-            for col_index, col in enumerate(row): # 1440
+        for row_index, row in enumerate(imarray):
+            for col_index, col in enumerate(row):
                 r, g, b = self.message_to_binary(col) # unpack
                 binary_message += r[-1] + g[-1] + b[-1] 
                 binary_token_index = binary_message.find(binary_token)
@@ -136,6 +136,8 @@ class Steganography():
                     break
             if done:
                 break
+        if not done:
+            return self.message_to_binary('Cannot found message')
         return binary_message
 
     def hide_message(self, in_file_name: str, out_file_name:str, message:str) -> None:
