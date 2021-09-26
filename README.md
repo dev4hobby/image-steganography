@@ -4,6 +4,8 @@
 What you see isn't everything.  
 This image contains hidden data.
 
+![example](./result.gif)  
+
 ## Dependency
 
 `Python>=3.8.x` with `pip`
