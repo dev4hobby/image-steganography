@@ -56,11 +56,12 @@ const Home: NextPage = () => {
     // Get from client side
     if (uint8array !== undefined){
       const myBlob = new Blob([uint8array], { type: 'image/png' })
-      let link = document.createElement('a')
-      link.download = 'hello.png'
-      const url = URL.createObjectURL(myBlob)
       setResultImageBlob(myBlob)
+      const url = URL.createObjectURL(myBlob)
       setResultImageUrl(url)
+      const now = new Date().toISOString().slice(0, 19).replace(/-/g, '').replace(/:/g, '').replace(/T/g, '')
+      let link = document.createElement('a')
+      link.download = `${now}-d3fau1t.png`
       link.href = url
       link.click()
     }
