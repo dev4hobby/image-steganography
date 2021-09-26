@@ -40,8 +40,6 @@ const Home: NextPage = () => {
   }
   const handleHideImageChange = (e: any) => {
     setImageForHide(e.target.files[0])
-    console.log('origin ', e.target.files[0])
-    console.log('selected ', imageForHide)
   }
 
   const handleHide = async (e: any) => {
