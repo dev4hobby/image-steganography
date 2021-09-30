@@ -52,7 +52,16 @@ const Home: NextPage = () => {
       body: formData
     })
     const reader = response.body!.getReader()
-    const { value: uint8array } = await reader.read()
+    let uint8array: Uint8Array = new Uint8Array()
+    let notEmpty = true
+    while (notEmpty) {
+      const { value: uint8arrayChunk } = await reader.read()
+      if (uint8arrayChunk != undefined){
+        uint8array = new Uint8Array([...uint8array, ...uint8arrayChunk])
+      } else {
+        notEmpty = false
+      }
+    }
     // Get from client side
     if (uint8array !== undefined){
       const myBlob = new Blob([uint8array], { type: 'image/png' })
