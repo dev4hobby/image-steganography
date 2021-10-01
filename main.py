@@ -18,9 +18,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get('/')
 async def read_root():
     return {"uptime": f"{str(round(time.time() - start_time, 1))} sec"}
+
+@app.get('/healthcheck', status_code=200)
+async def healthcheck():
+    return 'Ready to Hide&Seek!'
 
 @app.post('/hide')
 async def hide(file: bytes = File(...), message: str = Form(...)) -> Response:
