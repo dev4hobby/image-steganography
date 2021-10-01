@@ -5,6 +5,7 @@ import { Button, Divider } from '@mui/material';
 import styles from '../styles/Home.module.css'
 import { useState } from 'react'
 import RotateLeftIcon from '@mui/icons-material/RotateLeft';
+import { apiBaseUrl } from '../env';
 
 const Home: NextPage = () => {
   const [messageForHide, setMessageForHide] = useState<string>('')
@@ -47,7 +48,7 @@ const Home: NextPage = () => {
     let formData = new FormData()
     formData.append('file', imageForHide)
     formData.append('message', messageForHide)
-    const response = await fetch('http://localhost:8000/hide', {
+    const response = await fetch(`${apiBaseUrl}/hide`, {
       method: 'POST',
       body: formData
     })
@@ -96,7 +97,7 @@ const Home: NextPage = () => {
     setExtractedMessage("If it's taking too long, it's likely that the hidden message doesn't exist.")
     let formData = new FormData()
     formData.append('file', imageForSeek)
-    const response = await fetch('http://localhost:8000/seek', {
+    const response = await fetch(`${apiBaseUrl}/seek`, {
       method: 'POST',
       body: formData
     }).then(res => res.json())
