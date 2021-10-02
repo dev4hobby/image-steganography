@@ -60,8 +60,17 @@ python seek.py -in image_out.png
 can serve steganography module on web server if you want.  
 
 ```bash
-uvicorn main:app --reload
+uvicorn main:app --host=0.0.0.0 --port=8000
 ```
+
+### Connect to browser (with Next.js)
+
+can serve steganography webpage if you want
+
+```bash
+cd steganography-web && yarn && yarn dev
+```
+
 
 ### API Document
 
