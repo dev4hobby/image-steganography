@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import Head from 'next/head'
-import { Button, Divider } from '@mui/material';
+import { Button, Divider, CircularProgress } from '@mui/material';
 import styles from '../styles/Home.module.css'
 import { useState } from 'react'
 import RotateLeftIcon from '@mui/icons-material/RotateLeft';
@@ -134,7 +134,7 @@ const Home: NextPage = () => {
           </div>
           <div style={{textAlign:"center", visibility: resultImageUrl ? "visible" :"hidden" }}>
             <h2>Result</h2>
-            { resultImageUrl ? <Image src={resultImageUrl} alt={'result image'} width={80} height={80} /> : <div></div> }
+            { resultImageUrl ? <Image src={resultImageUrl} alt={'result image'} width={80} height={80} /> : <CircularProgress color='secondary' /> }
           </div>
         </form>
         <Divider style={{width:'100%'}} />
