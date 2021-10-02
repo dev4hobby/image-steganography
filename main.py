@@ -8,7 +8,7 @@ start_time = time.time()
 s = Steganography()
 origins = [
     "https://image-steganography.vercel.app",
-    "https://image-steganography.d3fau1t.net"
+    "https://steganography.d3fau1t.net"
 ]
 app = FastAPI()
 app.add_middleware(
@@ -23,10 +23,6 @@ app.add_middleware(
 @app.get('/')
 async def read_root():
     return {"uptime": f"{str(round(time.time() - start_time, 1))} sec"}
-
-@app.get('/healthcheck', status_code=200)
-async def healthcheck():
-    return 'Ready to Hide&Seek!'
 
 @app.post('/hide')
 async def hide(file: bytes = File(...), message: str = Form(...)) -> Response:
