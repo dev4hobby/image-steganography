@@ -7,6 +7,7 @@ from steganography import Steganography
 start_time = time.time()
 s = Steganography()
 origins = [
+    "http://localhost:3000",
     "https://image-steganography.vercel.app",
     "https://steganography.d3fau1t.net"
 ]
