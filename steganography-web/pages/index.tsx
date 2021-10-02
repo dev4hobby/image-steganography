@@ -11,6 +11,7 @@ const Home: NextPage = () => {
   const [messageForHide, setMessageForHide] = useState<string>('')
   const [imageForHide, setImageForHide] = useState<string | Blob>('')
   const [resultImageUrl, setResultImageUrl] = useState<string | undefined>(undefined)
+  const [inProgress, setInProgress] = useState<boolean>(false)
   const [resultImageBlob, setResultImageBlob] = useState<Blob | undefined>(undefined)
   const [imageForSeek, setImageForSeek] = useState<string | Blob>('')
   const [extractedMessage, setExtractedMessage] = useState<string | undefined>(undefined)
@@ -45,6 +46,7 @@ const Home: NextPage = () => {
 
   const handleHide = async (e: any) => {
     e.preventDefault()
+    setInProgress(true)
     let formData = new FormData()
     formData.append('file', imageForHide)
     formData.append('message', messageForHide)
@@ -69,6 +71,7 @@ const Home: NextPage = () => {
       setResultImageBlob(myBlob)
       const url = URL.createObjectURL(myBlob)
       setResultImageUrl(url)
+      setInProgress(false)
       const now = new Date().toISOString().slice(0, 19).replace(/-/g, '').replace(/:/g, '').replace(/T/g, '')
       let link = document.createElement('a')
       link.download = `${now}-d3fau1t.png`
@@ -132,12 +135,20 @@ const Home: NextPage = () => {
             </Button>
             { resultImageUrl ? <Button variant="contained" style={{width: '49%', marginLeft: resultImageUrl ? '1%' : 'none'}} onClick={passImageToSeekMessage}>Use this</Button> : <Button style={{visibility:'hidden'}} /> }
           </div>
-          <div style={{textAlign:"center", visibility: resultImageUrl ? "visible" :"hidden" }}>
+          <div style={{
+            textAlign:"center",
+            display: inProgress === true
+              && resultImageUrl === undefined
+              ? "block" :"none",
+            }}>
+            <CircularProgress />
+          </div>
+          <div style={{textAlign:"center", display: resultImageUrl ? "block" :"none" }}>
             <h2>Result</h2>
-            { resultImageUrl ? <Image src={resultImageUrl} alt={'result image'} width={80} height={80} /> : <CircularProgress color='secondary' /> }
+            { resultImageUrl ? <Image src={resultImageUrl} alt={'result image'} width={80} height={80} /> : <></> }
           </div>
         </form>
-        <Divider style={{width:'100%'}} />
+        <Divider style={{width:'100%', marginTop:'1.8em'}} />
         
         <h1>Seek</h1>
         <form onSubmit={handleSeek} style={{width:'100%'}}>
