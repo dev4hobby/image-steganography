@@ -31,10 +31,17 @@ class Steganography():
         '''
         Convert binary string to ascii string
         '''
-        binstr = map(''.join, zip(*[iter(message)]*8))
-        result = str()
-        for bin in binstr:
-            result += chr(int(bin, 2))
+        
+        # only ASCII
+        # binstr = map(''.join, zip(*[iter(message)]*8))
+        # result = str()
+        # for idx, bin in enumerate(binstr):
+        #     print(bin)
+        #     result += chr(int(bin, 2))
+
+        # for UTF-8
+        byte_list = [message[i:i+8] for i in range(0, len(message), 8)]
+        result = bytes([int(uint8, 2) for uint8 in byte_list]).decode('utf-8')
         return result
 
     def resize_image(self, image: Image, size: Tuple[int, int], save=False, file_name='resized_image.png') -> Image:
