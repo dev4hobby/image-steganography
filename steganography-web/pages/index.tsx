@@ -11,7 +11,8 @@ const Home: NextPage = () => {
   const [messageForHide, setMessageForHide] = useState<string>('')
   const [imageForHide, setImageForHide] = useState<string | Blob>('')
   const [resultImageUrl, setResultImageUrl] = useState<string | undefined>(undefined)
-  const [inProgress, setInProgress] = useState<boolean>(false)
+  const [hideInProgress, setHideInProgress] = useState<boolean>(false)
+  const [seekInProgress, setSeekInProgress] = useState<boolean>(false)
   const [resultImageBlob, setResultImageBlob] = useState<Blob | undefined>(undefined)
   const [imageForSeek, setImageForSeek] = useState<string | Blob>('')
   const [extractedMessage, setExtractedMessage] = useState<string | undefined>(undefined)
@@ -28,6 +29,8 @@ const Home: NextPage = () => {
     setResultImageBlob(undefined)
     setImageForSeek('')
     setExtractedMessage(undefined)
+    setHideInProgress(false)
+    setSeekInProgress(false)
     window.alert("Now, we're back to the past!")
   }
 
@@ -46,7 +49,7 @@ const Home: NextPage = () => {
 
   const handleHide = async (e: any) => {
     e.preventDefault()
-    setInProgress(true)
+    setHideInProgress(true)
     let formData = new FormData()
     formData.append('file', imageForHide)
     formData.append('message', messageForHide)
@@ -71,7 +74,7 @@ const Home: NextPage = () => {
       setResultImageBlob(myBlob)
       const url = URL.createObjectURL(myBlob)
       setResultImageUrl(url)
-      setInProgress(false)
+      setHideInProgress(false)
       const now = new Date().toISOString().slice(0, 19).replace(/-/g, '').replace(/:/g, '').replace(/T/g, '')
       let link = document.createElement('a')
       link.download = `${now}-d3fau1t.png`
@@ -97,6 +100,7 @@ const Home: NextPage = () => {
 
   const handleSeek = async (e: any) => {
     e.preventDefault()
+    setSeekInProgress(true)
     setExtractedMessage("If it's taking too long, it's likely that the hidden message doesn't exist.")
     let formData = new FormData()
     formData.append('file', imageForSeek)
@@ -105,6 +109,7 @@ const Home: NextPage = () => {
       body: formData
     }).then(res => res.json())
     .then(data => {
+      setSeekInProgress(false)
       setExtractedMessage(data.message)
     })
   }
@@ -137,7 +142,7 @@ const Home: NextPage = () => {
           </div>
           <div style={{
             textAlign:"center",
-            display: inProgress === true
+            display: hideInProgress === true
               && resultImageUrl === undefined
               ? "block" :"none",
             }}>
@@ -160,7 +165,7 @@ const Home: NextPage = () => {
                 { imageForSeek ? "Good, let's dig in" : 'Choose image to seek message'}
               </Button>
             </label>
-            <label htmlFor="seek-message">{ imageForSeek ? 'Your message is ...' : 'Waiting ...' }</label><br />
+            <label htmlFor="seek-message">{ imageForSeek ? 'Your message is ...' : 'Waiting ...' }</label> <div style={{display: seekInProgress === true ? 'block' : 'none'}}><CircularProgress /> </div> <br />
             <p id="seek-message">{extractedMessage}</p>
           </div>
           <div>
