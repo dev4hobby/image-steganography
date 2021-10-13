@@ -2,7 +2,7 @@ import time
 from fastapi import FastAPI, Form, File, Response
 from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
-from steganography import Steganography
+from bintruder.steganography import Steganography
 
 start_time = time.time()
 s = Steganography()
