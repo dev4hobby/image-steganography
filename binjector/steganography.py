@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image
 from typing import Union, Tuple
 from pathlib import Path
-from utils import get_timestamp_as_md5
+from .utils import get_timestamp_as_md5, read_settings
 
 class Steganography():
     '''
@@ -12,8 +12,7 @@ class Steganography():
     '''
 
     def __init__(self):
-        with open("settings.json", "r") as setting_file:
-            settings = json.load(setting_file)
+        settings = read_settings()
         self.bits = int(settings.get('bits', 8))
         self.encoding = settings.get('encoding', 'utf-8')
         self.token_string = settings.get('token_string', '#secret#')
@@ -31,15 +30,6 @@ class Steganography():
         '''
         Convert binary string to ascii string
         '''
-        
-        # only ASCII
-        # binstr = map(''.join, zip(*[iter(message)]*8))
-        # result = str()
-        # for idx, bin in enumerate(binstr):
-        #     print(bin)
-        #     result += chr(int(bin, 2))
-
-        # for UTF-8
         byte_list = [message[i:i+8] for i in range(0, len(message), 8)]
         result = bytes([int(uint8, 2) for uint8 in byte_list]).decode('utf-8')
         return result
@@ -83,8 +73,6 @@ class Steganography():
             return ''.join(format(ord(char), '08b') for char in message)
         elif type(message) == bytes or type(message) == np.ndarray:
             return [ format(i, "08b") for i in message]
-        # elif type(message) == int or type(message) == np.uint8:
-        #     return format(message, "08b")
         else:
             raise TypeError("Input type not supported")
 
@@ -133,7 +121,7 @@ class Steganography():
         done = False
         for row_index, row in enumerate(imarray):
             for col_index, col in enumerate(row):
-                r, g, b = self.message_to_binary(col) # unpack
+                r, g, b = self.message_to_binary(col)
                 binary_message += r[-1] + g[-1] + b[-1] 
                 binary_token_index = binary_message.find(binary_token)
                 if binary_token_index != -1:
