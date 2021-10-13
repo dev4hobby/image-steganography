@@ -16,7 +16,6 @@ class Steganography():
         self.bits = int(settings.get('bits', 8))
         self.encoding = settings.get('encoding', 'utf-8')
         self.token_string = settings.get('token_string', '#secret#')
-        print(self.token_string)
 
     def get_pixel_info(self, imarray: np.ndarray) -> np.array:
         return np.array(imarray)
