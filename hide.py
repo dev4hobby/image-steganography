@@ -1,6 +1,7 @@
 import json
 import argparse
-from steganography import Steganography
+from binjector.steganography import Steganography
+from binjector.utils import read_settings
 
 parser = argparse.ArgumentParser(description='Hide a message in an image.')
 parser.add_argument('-in', '--in-image', help='The image to hide the message in.', required=False)
@@ -8,9 +9,8 @@ parser.add_argument('-out', '--out-image', help='The image to save the message i
 parser.add_argument('-m', '--message', help='The message file path to hide.', required=False)
 args = parser.parse_args()
 
-with open("settings.json", "r") as setting_file:
-  settings = json.load(setting_file)
-message_file_name = args.message if args.message else settings.get('payload')
+settings = read_settings()
+message_file_name = args.message if args.message else settings.get('message')
 in_file_name = args.in_image if args.in_image else settings.get('in_image')
 out_file_name = args.out_image if args.out_image else settings.get('out_image')
 

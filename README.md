@@ -1,6 +1,6 @@
 # Image Steganography
 
-![image_out](./image_out.png)  
+![image_out](./output.png)  
 What you see isn't everything.  
 This image contains hidden data.
 
@@ -38,7 +38,7 @@ python hide.py
 or
 
 ```bash
-python hide.py -in image.png -out image_out.png -m payload.txt
+python hide.py -in image.png -out output.png -m message.txt
 ```
 
 ### Seek message
@@ -52,7 +52,7 @@ python seek.py
 or
 
 ```bash
-python seek.py -in image_out.png
+python seek.py -in output.png
 ```
 
 ## Serve as WebServer (with FastAPI)
@@ -92,9 +92,9 @@ You can check the image path or other required values.
   "encoding": "utf8",
   "bits": 8,
   "token_string": "#secret#",
-  "payload": "./payload.txt",
+  "message": "./message.txt",
   "in_image": "./image.png",
-  "out_image": "./image_out.png",
-  "modified_image": "./image_out.png"
+  "out_image": "./output.png",
+  "modified_image": "./output.png"
 }
 ```
