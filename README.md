@@ -78,8 +78,8 @@ cd steganography-web && yarn && yarn dev
 
 Check this out
 
-- http://localhost:8000/docs
-- http://localhost:8000/redoc
+- [docs](https://image-steganography-d3fau1t.herokuapp.com/docs)
+- [redoc](https://image-steganography-d3fau1t.herokuapp.com/redoc)
 
 ## Appendix
 

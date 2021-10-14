@@ -16,5 +16,5 @@ dist
 misc/
 !input.png
 !output.png
-*.png
+.*.png
 # << misc: image << #
