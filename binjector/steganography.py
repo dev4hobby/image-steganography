@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image
 from typing import Union, Tuple
 from pathlib import Path
-from .utils import get_timestamp_as_md5, read_settings
+from .utils import get_timestamp_as_md5, read_settings, get_resized_ratio
 
 class Steganography():
     '''
@@ -143,6 +143,9 @@ class Steganography():
             raise ValueError("Data is empty !!")
         message += self.token_string
         image = Image.open(in_file_name)
+        need_resize, new_size = get_resized_ratio((image.width, image.height), message)
+        if need_resize:
+            image = image.resize(new_size, Image.ANTIALIAS)
         pixels = self.get_pixel_info(image)
         modified_array = self.replace_lsb(
             image_size = image.size,
