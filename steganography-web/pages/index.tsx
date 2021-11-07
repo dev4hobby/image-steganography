@@ -135,7 +135,7 @@ const Home: NextPage = () => {
             <textarea style={{width:'100%'}} id="message" name="message" rows={10} cols={50} placeholder="type what you wanna hide" value={messageForHide} onChange={handleHideMessageChange}/>
           </div>
           <div style={{textAlign:'center'}}>
-            <Button onClick={handleHide} style={{width: resultImageUrl ? '49%' : '100%', marginRight: resultImageUrl ? '1%' : 'none'}} disabled={imageForHide ? messageForHide ? false : true : true} variant="contained" component="span">
+            <Button onClick={handleHide} style={{width: resultImageUrl ? '49%' : '100%', marginRight: resultImageUrl ? '1%' : 'none'}} disabled={imageForHide ? messageForHide ? hideInProgress ? true : false : true : true} variant="contained" component="span">
                 Submit
             </Button>
             { resultImageUrl ? <Button variant="contained" style={{width: '49%', marginLeft: resultImageUrl ? '1%' : 'none'}} onClick={passImageToSeekMessage}>Use this</Button> : <Button style={{visibility:'hidden'}} /> }
