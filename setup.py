@@ -8,7 +8,7 @@ with open("binjector/requirements.txt", "r", encoding="utf-8") as f:
     requirements = f.read()
 setup(
     name = 'binjector',
-    version = '0.1.5',
+    version = '0.1.6',
     author = 'Seongchuel Ahn',
     author_email = 'aciddust20@gmail.com',
     license = 'MIT',
