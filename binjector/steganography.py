@@ -87,6 +87,7 @@ class Steganography():
                 if no_more_bits:
                     modified_array[row, col] = pixel_info[row, col]
                 else:
+                    # FIXME: try~except is not good
                     try:
                         r, g, b = pixel_info[row, col]
                         color_list = [hex(r), hex(g), hex(b)]
@@ -125,8 +126,13 @@ class Steganography():
         done = False
         for row_index, row in enumerate(imarray):
             for col_index, col in enumerate(row):
-                r, g, b = self.message_to_binary(col)
-                binary_message += r[-1] + g[-1] + b[-1] 
+                # FIXME: try~except is not good
+                try:
+                    r, g, b = self.message_to_binary(col)
+                    binary_message += r[-1] + g[-1] + b[-1]
+                except ValueError:
+                    r, g, b, a = self.message_to_binary(col)
+                    binary_message += r[-1] + g[-1] + b[-1] + a[-1]
                 binary_token_index = binary_message.find(binary_token)
                 if binary_token_index != -1:
                     binary_message = binary_message[:binary_token_index]
