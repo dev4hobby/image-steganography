@@ -87,8 +87,12 @@ class Steganography():
                 if no_more_bits:
                     modified_array[row, col] = pixel_info[row, col]
                 else:
-                    r, g, b = pixel_info[row, col]
-                    color_list = [hex(r), hex(g), hex(b)]
+                    try:
+                        r, g, b = pixel_info[row, col]
+                        color_list = [hex(r), hex(g), hex(b)]
+                    except ValueError:
+                        r, g, b, a = pixel_info[row, col]
+                        color_list = [hex(r), hex(g), hex(b), hex(a)]
                     for index, color in enumerate(color_list):
                         if not no_more_bits and (bit := next(bits_generator, None)):
                             binary = bin(int(color[2:], 16))[2:].zfill(self.bits)
