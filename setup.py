@@ -8,7 +8,7 @@ with open("binjector/requirements.txt", "r", encoding="utf-8") as f:
     requirements = f.read()
 setup(
     name = 'binjector',
-    version = '0.1.6',
+    version = '0.1.7',
     author = 'Seongchuel Ahn',
     author_email = 'aciddust20@gmail.com',
     license = 'MIT',
@@ -16,7 +16,7 @@ setup(
     long_description = long_description,
     long_description_content_type = "text/markdown",
     keywords = 'steganography, forensic',
-    url="https://github.com/dev4hobby/image-steganography/tree/release",
+    url="https://github.com/dev4hobby/image-steganography",
     packages = find_packages(),
     install_requires = [requirements],
     python_requires='>=3.6',
