@@ -187,17 +187,10 @@ class Steganography():
             pixel_info = pixels,
             modified_array = self.get_verified_array(pixels.shape)
         )
-        '''
-        TODO: concat PNG File Header
-        '''
-        # Alternative way to response PNG bytes
-        Path('./misc').mkdir(parents=True, exist_ok=True)
-        temp_file_name = f'./misc/{get_timestamp_as_md5()}.png'
         image = Image.fromarray(modified_array)
-        image.save(temp_file_name)
-        with open(temp_file_name, 'rb') as f:
-            image = f.read()
-        return image
+        buffered = io.BytesIO()
+        image.save(buffered, format="PNG")
+        return buffered.getvalue()
     
     def seek_message_for_web(self, image: bytes) -> Union[str, None]:
         img = Image.open(io.BytesIO(image))
