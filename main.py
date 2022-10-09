@@ -35,6 +35,6 @@ async def seek(file: bytes = File(...)):
     message = s.seek_message_for_web(file)
     return {"message": message}
 
-
-
-
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8080)
