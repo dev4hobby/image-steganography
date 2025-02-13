@@ -31,7 +31,7 @@ class Steganography:
     def get_pixel_info(self, imarray: np.ndarray) -> np.ndarray:
         return np.array(imarray)
 
-    def get_verified_array(self, shape: Tuple[int, int, int]) -> np.ndarray:
+    def get_verified_array(self, shape: Tuple[int, ...]) -> np.ndarray:
         """
         get verified ndarray
         """
