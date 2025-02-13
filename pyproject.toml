@@ -30,6 +30,15 @@ line_length = 88
 known_first_party = ["binjector"]
 known_third_party = ["numpy,click,pillow"]
 
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.1.8"
+version_files = [
+  "pyproject.toml:version"
+]
+tag_format = "v$version"
+update_changelog_on_bump = true
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
