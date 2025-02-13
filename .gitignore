@@ -1,6 +1,5 @@
 # >> Web Deployment >>
 .env
-.deta
 # << Web Deployment <<
 
 # >> Python >> #
@@ -9,10 +8,12 @@ __pycache__/
 *$py.class
 # << Python << #
 
+# >> Python: test >> #
+.pytest_cache
+# << Python: test << #
+
 # >> Python: build package >> #
 *.egg-info
-build.sh
-clean.sh
 build
 dist
 # << Python: build package<< #
@@ -23,3 +24,10 @@ misc/
 !output.png
 .*.png
 # << misc: image << #
+
+# >> binjector >> #
+.binjector-settings.json
+examples/output*.*
+test/assets/output.*
+test/output*.*
+# << binjector << #

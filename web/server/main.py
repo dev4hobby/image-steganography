@@ -1,15 +1,15 @@
 import time
-from fastapi import FastAPI, Form, File, Response
+
+from fastapi import FastAPI, File, Form, Response
 from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
+
 from binjector.steganography import Steganography
 
 start_time = time.time()
 s = Steganography()
 origins = [
     "http://localhost:3000",
-    "https://image-steganography.vercel.app",
-    "https://steganography.d3fau1t.net"
 ]
 app = FastAPI()
 app.add_middleware(
@@ -21,20 +21,24 @@ app.add_middleware(
 )
 
 
-@app.get('/')
+@app.get("/")
 async def read_root():
     return {"uptime": f"{str(round(time.time() - start_time, 1))} sec"}
 
-@app.post('/hide')
+
+@app.post("/hide")
 async def hide(file: bytes = File(...), message: str = Form(...)) -> Response:
     image = s.hide_message_for_web(file, message)
-    return Response(content=image, media_type='image/png')
+    return Response(content=image, media_type="image/png")
 
-@app.post('/seek')
+
+@app.post("/seek")
 async def seek(file: bytes = File(...)):
     message = s.seek_message_for_web(file)
     return {"message": message}
 
+
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="192.168.0.1", port=8080)
+
+    uvicorn.run(app, host="0.0.0.0", port=8080)

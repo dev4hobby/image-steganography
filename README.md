@@ -1,28 +1,23 @@
 # Image Steganography
 
-![image_out](./output.png)  
-What you see isn't everything.  
+![image_out](./resources/output.png)
+
+What you see isn't everything.
+
 This image contains hidden data.
 
-![example](./result.gif)  
+![example](./resources/result.gif)
 
 ## Dependency
 
-`Python>=3.8.x` with `pip`
+numpy, pillow, click, ...
 
-```txt
-numpy==1.21.2
-Pillow==8.3.2
-fastapi==0.68.1
-pydantic==1.8.2
-uvicorn==0.15.0
-python-multipart==0.0.5
-```
+Check [pyproject.toml](pyproject.toml)
 
 ## Install
 
 ```bash
-pip install -r requirements.txt
+pip install -r web/requirements.txt
 ```
 
 ## Use as a module
@@ -32,13 +27,14 @@ pip install -r requirements.txt
 converts the input string to binary and replaces the LSB of each pixel
 
 ```bash
-python hide.py
-```
+# case 1. use default setting
+python examples/hide.py
 
-or
+# case 2. input options
+python examples/hide.py -in image.png -out output.png -m message.txt
 
-```bash
-python hide.py -in image.png -out output.png -m message.txt
+# case 3. binjector from pypi
+binjector hide -i image.png -o output.png -m message.txt
 ```
 
 ### Seek message
@@ -46,21 +42,23 @@ python hide.py -in image.png -out output.png -m message.txt
 Concatenate each LSB in the image to see the hidden string.
 
 ```bash
-python seek.py
-```
 
-or
+# case 1. use default setting
+python examples/seek.py
 
-```bash
-python seek.py -in output.png
+# case 2. input options
+python examples/seek.py -in output.png
+
+# case 3. binjector from pypi
+binjector seek -i output.png
 ```
 
 ## Serve as WebServer (with FastAPI)
 
-can serve steganography module on web server if you want.  
+can serve steganography module on web server if you want.
 
 ```bash
-uvicorn main:app --host=0.0.0.0 --port=8000
+uvicorn web.server.main:app --host=0.0.0.0 --port=8000
 ```
 
 ### Connect to browser (with Next.js)
@@ -68,9 +66,8 @@ uvicorn main:app --host=0.0.0.0 --port=8000
 can serve steganography webpage if you want
 
 ```bash
-cd steganography-web && yarn && yarn dev
+cd web/client && yarn && yarn dev
 ```
-
 
 ### API Document
 

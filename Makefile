@@ -10,11 +10,14 @@ help: ## 도움말
 
 .PHONY: build
 build: ## 빌드
-	python3 setup.py bdist_wheel
-	cd dist && twine upload binjector*.whl
+	poetry build
+	pip install dist/*.whl
+
+.PHONY: test
+test: ## 테스트
+	cd test && poetry run pytest --log-cli-level DEBUG
 
 .PHONY: clean
 clean: ## 빌드 파일 삭제
-	pip uninstall binjector
-	rm -rf build
 	rm -rf dist
+	pip uninstall -y binjector

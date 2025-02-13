@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "binjector"
+version = "0.1.8"
+description = "Binjector(Binary Injector) makes your text inject into image easily."
+authors = ["d3fau1t <aciddust20@gmail.com>"]
+license = "MIT License"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+numpy = "^2.2.2"
+pillow = "^11.1.0"
+click = "^8.1.8"
+
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+isort = "^6.0.0"
+types-pillow = "^10.2.0.20240822"
+pytest = "^8.3.4"
+twine = "^6.1.0"
+
+[tool.poetry.scripts]
+binjector = "binjector.cli:cli"
+
+[tool.isort]
+profile = "black"
+line_length = 88
+known_first_party = ["binjector"]
+known_third_party = ["numpy,click,pillow"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
