@@ -145,32 +145,30 @@ class Steganography:
         """
         get LSB until meet secret token
         """
-        binary_message = str()
-        binary_token = self.message_to_binary(self.token_string)
-        if isinstance(binary_token, list):
-            binary_token = "".join(binary_token)
-        done = False
-        for row_index, row in enumerate(imarray):
-            for col_index, col in enumerate(row):
-                # FIXME: try~except is not good
-                try:
-                    r, g, b = self.message_to_binary(col)
-                    binary_message += r[-1] + g[-1] + b[-1]
-                except ValueError:
-                    r, g, b, a = self.message_to_binary(col)
-                    binary_message += r[-1] + g[-1] + b[-1] + a[-1]
-                binary_token_index = binary_message.find(binary_token)
-                if binary_token_index != -1:
-                    binary_message = binary_message[:binary_token_index]
-                    done = True
-                if done:
-                    break
-            if done:
-                break
-        if not done:
-            result = self.message_to_binary("Cannot found message")
-            return "".join(result) if isinstance(result, list) else result
-        return binary_message
+        binary_token = "".join(
+            self.message_to_binary(self.token_string)
+            if isinstance(self.message_to_binary(self.token_string), list)
+            else self.message_to_binary(self.token_string)
+        )
+        binary_message = []
+
+        for row in imarray:
+            for pixel in row:
+                binary_pixel = self.message_to_binary(pixel)
+                if len(pixel) == 3:  # RGB
+                    binary_message.extend(p[-1] for p in binary_pixel[:3])
+                else:  # RGBA
+                    binary_message.extend(p[-1] for p in binary_pixel[:4])
+
+                # Convert accumulated bits to string and check for token
+                current_message = "".join(binary_message)
+                token_index = current_message.find(binary_token)
+                if token_index != -1:
+                    return current_message[:token_index]
+
+        # If token not found, return error message
+        result = self.message_to_binary("Cannot found message")
+        return "".join(result) if isinstance(result, list) else result
 
     def hide_message(self, in_file_name: str, out_file_name: str, message: str) -> None:
         """
