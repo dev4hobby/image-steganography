@@ -32,7 +32,7 @@ known_third_party = ["numpy,click,pillow"]
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "0.1.9"
+version = "0.1.10"
 version_files = [
   "pyproject.toml:version"
 ]
