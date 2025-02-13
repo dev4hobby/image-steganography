@@ -2,7 +2,7 @@
 
 Binjector(Binary Injector) makes your text inject into image easily.
 
-[Web version](https://image-steganography.vercel.app/)
+[Web version](https://web-ashen-psi.vercel.app/binjector)
 
 [Git: main](https://github.com/dev4hobby/image-steganography)
 
