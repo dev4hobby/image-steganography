@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "binjector"
-version = "0.1.9"
+version = "0.1.10"
 description = "Binjector(Binary Injector) makes your text inject into image easily."
 authors = ["d3fau1t <aciddust20@gmail.com>"]
 license = "MIT License"
