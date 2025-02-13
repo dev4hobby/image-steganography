@@ -18,6 +18,8 @@ isort = "^6.0.0"
 types-pillow = "^10.2.0.20240822"
 pytest = "^8.3.4"
 twine = "^6.1.0"
+commitizen = "^4.2.1"
+pre-commit = "^4.1.0"
 
 [tool.poetry.scripts]
 binjector = "binjector.cli:cli"
